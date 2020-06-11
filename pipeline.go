@@ -156,6 +156,17 @@ func (pr *PipelineRun) GetNode(id string) (node *PipelineNode, err error) {
 	return node, nil
 }
 
+func (pr *PipelineRun) GetLog(id string) (log *PipelineNodeLog, err error) {
+	log = new(PipelineNodeLog)
+	href := pr.Base + "/execution/node/" + id + "/wfapi/log"
+	_, err = pr.Job.Jenkins.Requester.GetJSON(href, log, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return log, nil
+}
+
 func (node *PipelineNode) GetLog() (log *PipelineNodeLog, err error) {
 	log = new(PipelineNodeLog)
 	href := node.Base + "/wfapi/log"
