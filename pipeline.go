@@ -33,29 +33,29 @@ func init() {
 }
 
 type PipelineRun struct {
-	Job       *Job
-	Base      string
+	Job       *Job                         `json:"-"`
+	Base      string                       `json:"-"`
 	URLs      map[string]map[string]string `json:"_links"`
-	ID        string
-	Name      string
-	Status    string
-	StartTime int64 `json:"startTimeMillis"`
-	EndTime   int64 `json:"endTimeMillis"`
-	Duration  int64 `json:"durationMillis"`
-	Stages    []PipelineNode
+	ID        string                       `json:"id"`
+	Name      string                       `json:"name"`
+	Status    string                       `json:'status'"`
+	StartTime int64                        `json:"startTimeMillis"`
+	EndTime   int64                        `json:"endTimeMillis"`
+	Duration  int64                        `json:"durationMillis"`
+	Stages    []*PipelineNode              `json:"stages"`
 }
 
 type PipelineNode struct {
-	Run            *PipelineRun
-	Base           string
+	Run            *PipelineRun                 `json:"-"`
+	Base           string                       `json:"-"`
 	URLs           map[string]map[string]string `json:"_links"`
-	ID             string
-	Name           string
-	Status         string
-	StartTime      int64 `json:"startTimeMillis"`
-	Duration       int64 `json:"durationMillis"`
-	StageFlowNodes []PipelineNode
-	ParentNodes    []int64
+	ID             string                       `json:"id"`
+	Name           string                       `json:"name"`
+	Status         string                       `json:'status'"`
+	StartTime      int64                        `json:"startTimeMillis"`
+	Duration       int64                        `json:"durationMillis"`
+	StageFlowNodes []*PipelineNode              `json:"stageFlowNodes"`
+	ParentNodes    []int64                      `json:"-"`
 }
 
 type PipelineInputAction struct {
