@@ -59,27 +59,27 @@ type PipelineNode struct {
 }
 
 type PipelineInputAction struct {
-	ID         string
-	Message    string
-	ProceedURL string
-	AbortURL   string
+	ID         string `json:"id"`
+	Message    string `json:"message"`
+	ProceedURL string `json:"proceedUrl"`
+	AbortURL   string `json:"abortUrl"`
 }
 
 type PipelineArtifact struct {
-	ID   string
-	Name string
-	Path string
-	URL  string
-	size int
+	ID   string `json:"id"`
+	Name string `json:"name"`
+	Path string `json:"path"`
+	URL  string `json:"url"`
+	size int    `json:"size"`
 }
 
 type PipelineNodeLog struct {
-	NodeID     string
-	NodeStatus string
-	Length     int64
-	HasMore    bool
-	Text       string
-	ConsoleURL string
+	NodeID     string `json:"nodeId"`
+	NodeStatus string `json:"nodeStatus"`
+	Length     int64  `json:"length"`
+	HasMore    bool   `json:"hasMore"`
+	Text       string `json:"text"`
+	ConsoleURL string `json:"consoleUrl"`
 }
 
 // utility function to fill in the Base fields under PipelineRun
