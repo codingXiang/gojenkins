@@ -529,7 +529,7 @@ func (j *Job) BuildWithParameters(params map[string]string) error {
 	for key, value := range params {
 		url = append(url, key+"="+value)
 	}
-	_, err := j.Jenkins.Requester.Get(j.Base+"/buildWithParameters"+strings.Join(url, "&"), &s, nil)
+	_, err := j.Jenkins.Requester.Get(j.Base+"/buildWithParameters?"+strings.Join(url, "&"), &s, nil)
 	if err != nil {
 		return err
 	}
