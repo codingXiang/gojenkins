@@ -525,7 +525,7 @@ func (j *Job) Poll() (int, error) {
 
 func (j *Job) BuildWithParameters(params map[string]string) error {
 	var s string
-	var url = []string{}
+	var url = make([]string, 0)
 	for key, value := range params {
 		url = append(url, key+"="+value)
 	}

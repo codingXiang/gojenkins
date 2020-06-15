@@ -275,8 +275,7 @@ func (j *Jenkins) BuildJob(name string, options ...interface{}) (int64, error) {
 
 func (j *Jenkins) BuildJobWithParameters(name string, params map[string]string) error {
 	job := Job{Jenkins: j, Raw: new(JobResponse), Base: "/job/" + name}
-
-	return nil
+	return job.BuildWithParameters(params)
 }
 
 func (j *Jenkins) GetNode(name string) (*Node, error) {
