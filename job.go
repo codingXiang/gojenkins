@@ -525,11 +525,8 @@ func (j *Job) Poll() (int, error) {
 
 func (j *Job) BuildWithParameters(params map[string]string) error {
 	var s string
-	var url = make([]string, 0)
-	for key, value := range params {
-		url = append(url, key+"="+value)
-	}
-	_, err := j.Jenkins.Requester.Get(j.Base+"/buildWithParameters?"+strings.Join(url, "&"), &s, nil)
+
+	_, err := j.Jenkins.Requester.Get(j.Base+"/buildWithParameters", &s, params)
 	if err != nil {
 		return err
 	}
