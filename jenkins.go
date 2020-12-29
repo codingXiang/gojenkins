@@ -93,6 +93,18 @@ func (j *Jenkins) Info() (*ExecutorResponse, error) {
 	return j.Raw, nil
 }
 
+func (j *Jenkins) GetCurrentExecute() (*CurrentExecute, error) {
+	ce := CurrentExecute{Jenkins: j, Raw: new(string), Base: "/ajaxExecutors"}
+	status, err := ce.Get()
+	if err != nil {
+		return nil, err
+	}
+	if status == 200 {
+		return &ce, nil
+	}
+	return nil, errors.New("No current execute found")
+}
+
 // SafeRestart jenkins, restart will be done when there are no jobs running
 func (j *Jenkins) SafeRestart() error {
 	_, err := j.Requester.Post("/safeRestart", strings.NewReader(""), struct{}{}, map[string]string{})

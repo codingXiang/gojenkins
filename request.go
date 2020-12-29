@@ -124,7 +124,7 @@ func (r *Requester) GetXML(endpoint string, responseStruct interface{}, query ma
 	return r.Do(ar, responseStruct, query)
 }
 
-func (r *Requester) Get(endpoint string, responseStruct interface{}, querystring map[string]string) (*http.Response, error) {
+func (r *Requester) Get(endpoint string, responseStruct interface{}, querystring map[string]string, condition ...string) (*http.Response, error) {
 	ar := NewAPIRequest("GET", endpoint, nil)
 	ar.Suffix = ""
 	return r.Do(ar, responseStruct, querystring)
@@ -145,7 +145,9 @@ func (r *Requester) redirectPolicyFunc(req *http.Request, via []*http.Request) e
 
 func (r *Requester) Do(ar *APIRequest, responseStruct interface{}, options ...interface{}) (*http.Response, error) {
 	if !strings.HasSuffix(ar.Endpoint, "/") && ar.Method != "POST" {
-		ar.Endpoint += "/"
+		if ar.Endpoint != "/ajaxExecutors"{
+			ar.Endpoint += "/"
+		}
 	}
 
 	fileUpload := false
